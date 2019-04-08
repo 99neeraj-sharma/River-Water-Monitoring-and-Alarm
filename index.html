@@ -1,0 +1,142 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages': ['line']
+    });
+    google.charts.setOnLoadCallback(drawChart1);
+
+    function drawChart1() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Time');
+      data.addColumn('number', 'Height in meter');
+      // data.addColumn('number', 'The Avengers');
+      // data.addColumn('number', 'Transformers: Age of Extinction');
+
+      data.addRows([
+        [1, 37.8],
+        [2, 30.9],
+        [3, 25.4],
+        [4, 11.7],
+        [5, 11.9],
+        [6, 8.8],
+        [7, 7.6],
+        [8, 12.3],
+        [9, 16.9],
+        [10, 12.8],
+        [11, 5.3],
+        [12, 6.6],
+        [13, 4.8],
+        [14, 4.2]
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Water Level in Uhl River',
+          subtitle: 'Data of every 10 mins'
+        },
+        // width: 100%,
+        // height: 500,
+        axes: {
+          x: {
+            0: {
+              side: 'bottom'
+            }
+          }
+        }
+      };
+
+      var chart = new google.charts.Line(document.getElementById('line_1'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+    // Second graph
+    google.charts.load('current', {
+      'packages': ['line']
+    });
+    google.charts.setOnLoadCallback(drawChart2);
+
+    function drawChart2() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Time');
+      data.addColumn('number', 'Height in meter');
+      // data.addColumn('number', 'The Avengers');
+      // data.addColumn('number', 'Transformers: Age of Extinction');
+
+      data.addRows([
+        [1, 37.8],
+        [2, 30.9],
+        [3, 25.4],
+        [4, 11.7],
+        [5, 11.9],
+        [6, 8.8],
+        [7, 7.6],
+        [8, 12.3],
+        [9, 16.9],
+        [10, 12.8],
+        [11, 5.3],
+        [12, 6.6],
+        [13, 4.8],
+        [14, 4.2]
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Water Level in Uhl River',
+          subtitle: 'Data of every 10 mins'
+        },
+        // width: 100%,
+        // height: 500,
+        axes: {
+          x: {
+            0: {
+              side: 'bottom'
+            }
+          }
+        }
+      };
+
+      var chart = new google.charts.Line(document.getElementById('line_2'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+    $(window).resize(function () {
+      drawChart1();
+      drawChart2();
+    });
+  </script>
+  <style>
+    .chart {
+      width: 100%;
+      min-height: 450px;
+    }
+
+    .row {
+      margin: 0 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <div class="container"> -->
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 col-md-2 col-lg-4">
+      <div id="line_1" class="chart"></div>
+    </div>
+    <div class="col-sm-12 col-xs-12 col-md-2 col-lg-4">
+      <div id="line_2" class="chart"></div>
+    </div>
+  </div>
+  <!-- </div> -->
+
+</body>
+
+</html>
