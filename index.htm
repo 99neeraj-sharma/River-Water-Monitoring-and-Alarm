@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>River Water Level Monitoring System</title>
-        <meta charset="utf-8">
+            <title>River Water Level Monitoring System</title>
+<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,16 +18,10 @@
     <div class="row">
             <div class="col-md-3 col-sm-12"></div>
     <div class="col-md-3 col-sm-12">
-
-
             <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/755824/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Velocity+Graph&type=line&xaxis=Time"></iframe>
 </div>
 <div class="col-md-3 col-sm-12">
-
-
         <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/755824/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Height+Graph&type=line&xaxis=Time"></iframe>
-
-
 </div>
 <div class="col-md-3 col-sm-12"></div>
 </div>
@@ -40,27 +34,58 @@
         <div class="row">
         <div class="col-md-6">
         <h4>Start date and time</h4>
-        <div id=sdatetime></div>
+        <input id=sdatetime type=text>
         </div>
         <div class="col-md-6">
         <h4>End date and time</h4>
-        <div id=edatetime></div>
+        <input id=edatetime type=text>
         </div>
-        <button type="button"><a href="https://api.thingspeak.com/channels/755824/feeds.csv">Export to csv</a></button>
 </div>
+<div style="text-align: center;">
+                <button type="button" id="button"><a href="" id="button_ref">Export to csv</a></button>
+                </div>
         <script>
         jQuery('#sdatetime').datetimepicker({
-                format:'d.m.Y H:i',
+                format:'Y:m:d H:i',
                 inline:true,
                 lang:'en'
         });
         </script>
         <script>
                 jQuery('#edatetime').datetimepicker({
-                        format:'d.m.Y H:i',
+                        format:'Y:m:d H:i',
                         inline:true,
                         lang:'en'
                 });
+        </script>
+        <script>
+                $(document).ready(function(){
+        $("#button").click(function(){
+                var startdate=$('#sdatetime').val();
+                var sdatentime = startdate.split(" ");
+                var sdate = sdatentime[0];
+                var stime = sdatentime[1];
+                var sdate = sdate.replace(/:/g, "-");
+                var enddate=$('#edatetime').val();
+                var edatentime = enddate.split(" ");
+                var edate = edatentime[0];
+                var etime = edatentime[1];
+                var edate = edate.replace(/:/g, "-");
+                var feed_link="https://api.thingspeak.com/channels/755824/feeds.csv";
+                feed_link = feed_link.concat("?start=");
+                feed_link = feed_link.concat(sdate);
+                feed_link = feed_link.concat("%20");
+                feed_link = feed_link.concat(stime);
+                feed_link = feed_link.concat(":00&end=");
+                feed_link = feed_link.concat(edate);
+                feed_link = feed_link.concat("%20");
+                feed_link = feed_link.concat(etime);
+                feed_link = feed_link.concat(":00");
+                $("#button_ref").attr("href", feed_link);
+
+        // alert("The paragraph was clicked.");
+                });
+        })
         </script>
 </div>
 </body>
